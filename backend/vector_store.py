@@ -20,6 +20,7 @@ def store_chunks(chunks):
             embeddings=[embedding],
             documents=[chunk["text"]],
             metadatas=[{
+		"ticker": chunk["ticker"],
                 "title": chunk["title"],
                 "url": chunk["url"],
                 "published": chunk["published"],

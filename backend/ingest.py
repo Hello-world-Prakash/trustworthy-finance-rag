@@ -15,6 +15,7 @@ def ingest_news():
             continue
 
         processed_articles.append({
+	    "ticker": article["ticker"],
             "title": article["title"],
             "url": article["url"],
             "published": article["published"],

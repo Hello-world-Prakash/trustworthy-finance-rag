@@ -22,8 +22,9 @@ def chunk_articles(articles):
 
         for i, chunk in enumerate(chunks):
             all_chunks.append({
-                "chunk_id": f"{article['title'][:30]}_{i}",
+                "chunk_id": f"{article['ticker']}_{i}",
                 "text": chunk,
+                "ticker": article.get("ticker", "GENERAL"),
                 "title": article["title"],
                 "url": article["url"],
                 "published": article["published"],
@@ -40,4 +41,4 @@ if __name__ == "__main__":
 
     print(f"Total articles: {len(articles)}")
     print(f"Total chunks: {len(chunks)}")
-    print(chunks[0]["text"][:500])
+    print(chunks[0])

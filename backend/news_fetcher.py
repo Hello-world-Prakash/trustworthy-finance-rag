@@ -1,18 +1,17 @@
 import feedparser
 
-RSS_FEEDS = [
-    "https://feeds.finance.yahoo.com/rss/2.0/headline",
-    "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-]
+TICKERS = ["AAPL", "NVDA", "TSLA", "MSFT", "AMZN", "GOOGL", "META", "JPM"]
 
 def fetch_news():
     articles = []
 
-    for feed_url in RSS_FEEDS:
-        feed = feedparser.parse(feed_url)
+    for ticker in TICKERS:
+        url = f"https://feeds.finance.yahoo.com/rss/2.0/headline?s={ticker}&region=US&lang=en-US"
+        feed = feedparser.parse(url)
 
-        for entry in feed.entries[:10]:
+        for entry in feed.entries[:8]:
             articles.append({
+                "ticker": ticker,
                 "title": entry.get("title", ""),
                 "url": entry.get("link", ""),
                 "published": entry.get("published", ""),
@@ -20,10 +19,3 @@ def fetch_news():
             })
 
     return articles
-
-if __name__ == "__main__":
-    news = fetch_news()
-    for article in news:
-        print(article["title"])
-        print(article["url"])
-        print("-" * 50)
